@@ -12,7 +12,9 @@ import io.reactivex.MaybeEmitter;
 import io.reactivex.MaybeObserver;
 import io.reactivex.MaybeOnSubscribe;
 import io.reactivex.Single;
+import io.reactivex.SingleEmitter;
 import io.reactivex.SingleObserver;
+import io.reactivex.SingleOnSubscribe;
 import io.reactivex.SingleSource;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
@@ -84,18 +86,17 @@ class Network {
 
     }
 
-    public Maybe<String> onMaybeSingleCreate() {
+    public Single<String> onMaybeSingleCreate() {
         Random random = new Random();
 
-        return Maybe.fromSingle(new SingleSource<String>() {
+        return Single.create(new SingleOnSubscribe<String>() {
             @Override
-            public void subscribe(@NonNull SingleObserver<? super String> observer) {
+            public void subscribe(@NonNull SingleEmitter<String> emitter) throws Exception {
                 if (random.nextBoolean()) {
-                    observer.onSuccess("Bang!");
+                    emitter.onSuccess("Bang!");
                 } else {
-
+                    emitter.onError(new Throwable("You're live"));
                 }
-
 
             }
         });

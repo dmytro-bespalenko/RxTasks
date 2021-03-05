@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.util.Log;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.SingleSource;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -61,17 +63,29 @@ class MainPresenter {
                 .subscribe(t -> Log.d(TAG, "\n" + t));
 
     }
-    void task4(){
+
+    void task4() {
         network.onMaybeCreate()
                 .subscribeOn(Schedulers.io())
                 .subscribe(t -> Log.d(TAG, "\n" + t));
     }
 
-    void task5(){
-        network.onMaybeCreate()
+    void task5() {
+        network.onMaybeSingleCreate()
                 .subscribeOn(Schedulers.io())
                 .subscribe(t -> Log.d(TAG, "\n" + t));
     }
+
+    void task7() {
+//        Observable.interval(1000L, TimeUnit.MILLISECONDS)
+//                .map(x -> x + 1) // to start from 1 instead of 0
+//                .map(x -> x + 2)
+//                .take(10)
+//                .subscribe(t -> Log.d(TAG, "\n" + t));
+
+
+    }
+
 
     void task10() {
         BehaviorSubject<Integer> subject = BehaviorSubject.create();
