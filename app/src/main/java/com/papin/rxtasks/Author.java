@@ -4,10 +4,12 @@ class Author {
     private int karma;
     private String name;
 
+
     public Author(int karma, String name) {
         this.karma = karma;
         this.name = name;
     }
+
 
     public Author() {
     }

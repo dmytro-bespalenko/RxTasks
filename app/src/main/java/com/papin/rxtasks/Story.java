@@ -19,7 +19,7 @@ class Story {
     @NonNull
     @Override
     public String toString() {
-        return getAuthor() + " " + getTitle() + " " + "\n";
+        return getId() + " " + getAuthor() + " " + getTitle() + " " + "\n";
     }
 
     public int getId() {
@@ -45,4 +45,5 @@ class Story {
     public void setAuthor(String author) {
         this.author = author;
     }
+
 }
